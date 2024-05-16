@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+	<main>
+		{{ form_start(formAdd) }}
+		{{ form_row(formAdd.name)}}
+		{{ form_row(formAdd.price)}}
+		{{ form_row(formAdd.stock_xs)}}
+		{{ form_row(formAdd.stock_s)}}
+		{{ form_row(formAdd.stock_m)}}
+		{{ form_row(formAdd.stock_l)}}
+		{{ form_row(formAdd.stock_xl)}}
+		{{ form_row(formAdd.homepage)}}
+		<button method='post'>Ajouter</button>
+		{{ form_end(formAdd) }}
+
+		{% for product in products %}
+			{{ form_start(productForms[product.id]) }}
+			{{ form_row(productForms[product.id].name) }}
+			{{ form_row(productForms[product.id].price) }}
+			{{ form_row(productForms[product.id].stock_xs) }}
+			{{ form_row(productForms[product.id].stock_s) }}
+			{{ form_row(productForms[product.id].stock_m) }}
+			{{ form_row(productForms[product.id].stock_l) }}
+			{{ form_row(productForms[product.id].stock_xl) }}
+			{{ form_row(productForms[product.id].homepage) }}
+            <button type='submit' method='post'>Mettre à jour</button>
+			{{ form_end(productForms[product.id]) }}
+			<a href="{{ path('delete_product', {'id': product.id}) }}">
+				<button type='button'>Supprimer</button>
+			</a>
+		{% endfor %}
+	</main>
+{% endblock %}
