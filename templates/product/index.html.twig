@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!
+{% endblock %}
+
+{% block body %}
+	<main>
+		<h1>Nos sweatshirts</h1>
+		{% for product in products %}
+			<h2>{{ product.name }}</h2>
+		{% endfor %}
+	</main>
+{% endblock %}

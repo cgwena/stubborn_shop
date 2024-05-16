@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<main>
+    <h1>Hello</h1>
+    {% for product in homepageProducts%}
+        <h2>{{ product.name }}</h2>
+    {% endfor %}
+</main>
+{% endblock %}
