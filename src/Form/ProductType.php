@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
 {
@@ -43,10 +44,8 @@ class ProductType extends AbstractType
             ->add('homepage', null, [
                 'label' => 'Page d\'accueil'
                 ])
-            ->add('img_name')
-            ->add('updated_at', null, [
-                'widget' => 'single_text',
-            ])
+            ->add('imageFile', VichImageType::class)
+            
         ;
     }
 

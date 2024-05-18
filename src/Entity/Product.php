@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[Vich\Uploadable]
 class Product
 {
     #[ORM\Id]
@@ -15,6 +18,13 @@ class Product
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
 
     #[ORM\Column]
     private ?float $price = null;
@@ -37,11 +47,8 @@ class Product
     #[ORM\Column]
     private ?bool $homepage = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $img_name = null;
-
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updated_at = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -58,6 +65,30 @@ class Product
         $this->name = $name;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 
     public function getPrice(): ?float
@@ -144,26 +175,16 @@ class Product
         return $this;
     }
 
-    public function getImgName(): ?string
-    {
-        return $this->img_name;
-    }
 
-    public function setImgName(?string $img_name): static
-    {
-        $this->img_name = $img_name;
-
-        return $this;
-    }
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): static
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updated_at;
 
         return $this;
     }
