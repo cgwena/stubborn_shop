@@ -1,12 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-<main>
-    <h1>Hello</h1>
-    {% for product in homepageProducts%}
-        <h2>{{ product.name }}</h2>
-    {% endfor %}
-</main>
+	<main>
+		<h1>Nos sweatshirts</h1>
+		<div class='products'>
+			{% for product in homepageProducts%}
+				<div class='products_details'>
+					<img src={{asset('images/products/' ~ product.imageName)}}>
+					<h2>{{ product.name }}</h2>
+					<h3>{{ product.price }}
+						€</h3>
+					<a href="{{ path('product_by_id', {'id': product.id}) }}">
+						<button>Voir</button>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</main>
 {% endblock %}
