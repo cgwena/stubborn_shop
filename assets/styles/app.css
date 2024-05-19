@@ -1,5 +1,31 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
 body {
     background-color: cornsilk;
+    min-height: 100vh;
+}
+
+main {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+header {
+    background-color: brown;
+    display: flex;
+}
+
+footer {
+    background-color: brown;
+}
+
+.logo {
+    width: 200px;
 }
 
 .products {

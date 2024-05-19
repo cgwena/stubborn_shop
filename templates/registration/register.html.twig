@@ -2,7 +2,9 @@
 
 {% block title %}Register{% endblock %}
 
+
 {% block body %}
+{% include '_partials/_header.html.twig'%}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
@@ -21,4 +23,5 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    {% include '_partials/_footer.html.twig'%}
 {% endblock %}

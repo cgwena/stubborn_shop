@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+{% include '_partials/_header.html.twig'%}
 	<main>
 		{{ form_start(formAdd) }}
 		{{ form_row(formAdd.name)}}
@@ -35,4 +36,5 @@
 			</a>
 		{% endfor %}
 	</main>
+	{% include '_partials/_footer.html.twig'%}
 {% endblock %}
