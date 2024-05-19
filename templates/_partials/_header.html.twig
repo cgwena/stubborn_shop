@@ -1,0 +1,18 @@
+<header>
+	<div class='hero'>
+		<img class='logo' src={{asset('images/Logo.png')}} class="logo">
+		<h3>Don't compromise on your look</h3>
+	</div>
+	<nav>
+		{% if is_granted('ROLE_USER') %}
+			<a href="/">Accueil</a>
+			<a href="/product">Boutique</a>
+			<a href="/cart">Panier</a>
+			<a href="/logout">Se déconnecter</a>
+		{% else %}
+			<a href="/">Accueil</a>
+			<a href="/register">S'inscrire</a>
+			<a href="/login">Se connecter</a>
+		{% endif %}
+	</nav>
+</header>

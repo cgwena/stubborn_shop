@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+	{% include '_partials/_header.html.twig'%}
 	<main>
 		<h1>Nos sweatshirts</h1>
 		<div class='products'>
@@ -20,4 +21,5 @@
 			{% endfor %}
 		</div>
 	</main>
+	{% include '_partials/_footer.html.twig'%}
 {% endblock %}
