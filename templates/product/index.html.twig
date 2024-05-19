@@ -6,8 +6,18 @@
 {% block body %}
 	<main>
 		<h1>Nos sweatshirts</h1>
-		{% for product in products %}
-			<h2>{{ product.name }}</h2>
-		{% endfor %}
+			<div class='products'>
+			{% for product in products %}
+				<div class='products_details'>
+					<img src={{asset('images/products/' ~ product.imageName)}}>
+					<h2>{{ product.name }}</h2>
+					<h3>{{ product.price }}
+						€</h3>
+					<a href="{{ path('product_by_id', {'id': product.id}) }}">
+						<button>Voir</button>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
 	</main>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!
+{% endblock %}
+
+{% block body %}
+	<main>
+		<div class='products'>
+			<div class='products_details'>
+				<img src={{asset('images/products/' ~ product.imageName)}}>
+				<h2>{{ product.name }}</h2>
+				<h3>{{ product.price }}
+					€</h3>
+				<button>Ajouter au panier</button>
+			</div>
+		</div>
+	</main>
+{% endblock %}

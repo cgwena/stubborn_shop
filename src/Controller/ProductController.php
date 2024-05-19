@@ -18,4 +18,13 @@ class ProductController extends AbstractController
             'products' => $products,
         ]);
     }
+
+    #[Route('/product/{id}', name: 'product_by_id')]
+    public function productById(int $id,ManagerRegistry $manager): Response
+    {
+        $product = $manager->getRepository(Product::class)->findOneBy(['id' => $id]);
+        return $this->render('product/details.html.twig', [
+            'product' => $product,
+        ]);
+    }
 }

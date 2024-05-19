@@ -1,3 +1,17 @@
 body {
-    background-color: skyblue;
+    background-color: cornsilk;
+}
+
+.products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.products_details {
+    width: 28vw;
+    padding: 10px;
+    margin: 1.5vw;
+    border: 1px solid grey;
+    border-radius: 10px;
 }
