@@ -4,10 +4,18 @@
 {% endblock %}
 
 {% block body %}
-{% include '_partials/_header.html.twig'%}
+	{% include '_partials/_header.html.twig'%}
 	<main>
 		<h1>Nos sweatshirts</h1>
-			<div class='products'>
+		<div class='filter'>
+				<select onchange='priceChoice(this.value)'>
+					<option>Fourchette de prix</option>
+					<option value="1">10 à 30 €</option>
+					<option value="2">30 à 35 €</option>
+					<option value="3">35 à 50 €</option>
+				</select>
+			</div>
+		<div class='products'>
 			{% for product in products %}
 				<div class='products_details'>
 					<img src={{asset('images/products/' ~ product.imageName)}}>
@@ -15,7 +23,7 @@
 					<h3>{{ product.price }}
 						€</h3>
 					<a href="{{ path('product_by_id', {'id': product.id}) }}">
-						<button>Voir</button>
+						<button class='btn btn-primary w-100'>Voir</button>
 					</a>
 				</div>
 			{% endfor %}
