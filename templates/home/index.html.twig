@@ -14,12 +14,15 @@
 					<h2>{{ product.name }}</h2>
 					<h3>{{ product.price }}
 						€</h3>
-					<a href="{{ path('product_by_id', {'id': product.id}) }}">
-						<button>Voir</button>
-					</a>
-				</div>
-			{% endfor %}
-		</div>
-	</main>
-	{% include '_partials/_footer.html.twig'%}
-{% endblock %}
+					{% if is_granted('ROLE_USER') %}
+
+						<a href="{{ path('product_by_id', {'id': product.id}) }}">
+							<button>Voir</button>
+						</a>
+                        {% endif %}
+					</div>
+				{% endfor %}
+			</div>
+		</main>
+		{% include '_partials/_footer.html.twig'%}
+	{% endblock %}

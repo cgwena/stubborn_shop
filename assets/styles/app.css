@@ -41,3 +41,9 @@ footer {
     border: 1px solid grey;
     border-radius: 10px;
 }
+
+.products_details_choice {
+    width: 28vw;
+    padding: 30px;
+    border: none;
+}
