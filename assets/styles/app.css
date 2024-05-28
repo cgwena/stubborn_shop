@@ -47,3 +47,27 @@ footer {
     padding: 30px;
     border: none;
 }
+
+.product_img {
+    width: 200px ;
+}
+
+.cart_product {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    margin-bottom: 25px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.cart_total {
+    display: flex;
+    justify-content: end;
+    padding: 25px;
+    margin-bottom: 25px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+}

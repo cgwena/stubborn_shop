@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!
+{% endblock %}
+
+{% block body %}
+	{% include '_partials/_header.html.twig'%}
+	<main>
+		{% if cart|length > 0 %}
+			<h1>Mon panier</h1>
+			{% set total = null %}
+			{% for item in cart %}
+				{% set total = total + (item.product.price * item.quantity) %}
+				<div class='cart_product'>
+					<img class='product_img' src={{asset('images/products/' ~ item.product.imageName)}}>
+					<h3>{{ item.product.name }}</h3>
+					<h3>{{ item.product.price|number_format(2, ',', '.') }}</h3>
+					<a href='{{ path('cart_remove_one', {id : item.product.id}) }}'><button>-</button></a>
+					<h4>{{ item.quantity }}</h4>
+					<a href='{{ path('cart_add', {id : item.product.id}) }}'><button>+</button></a>
+					<h3>{{ (item.product.price * item.quantity)|number_format(2, ',', '.') }}</h3>
+					<a href={{ path('cart_remove', {id : item.product.id} ) }}>
+						<button>Retirer du panier</button>
+					</a>
+				</div>
+			{% endfor %}
+			<div class='cart_total'>
+				<h3>Total : {{ total|number_format(2, ',', '.') }} €</h3>
+			</div>
+
+			<a href='cart/removeAll'>
+				<button>Supprimer tous les articles</button>
+			</a>
+		{% else %}
+			<h1>Mon panier</h1>
+			<h3>Votre panier est vide !</h3>
+		{% endif %}
+	</main>
+	{% include '_partials/_footer.html.twig'%}
+{% endblock %}
