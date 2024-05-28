@@ -10,9 +10,9 @@
 			<div class='products_details'>
 				<img src={{asset('images/products/' ~ product.imageName)}}>
 				<h2>{{ product.name }}</h2>
-				<h3>{{ product.price }}
+				<h3>{{ product.price|number_format(2, ',', '.') }}
 					€</h3>
-				<button>Ajouter au panier</button>
+				<a href='{{ path('cart_add', {id : product.id}) }}'><button>Ajouter au panier</button></a>
 			</div>
 		</div>
 	</main>
