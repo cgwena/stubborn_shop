@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!
+{% block title %}Stubborn - Mon panier
 {% endblock %}
 
 {% block body %}
@@ -51,6 +51,9 @@
 		{% else %}
 			<h1>Mon panier</h1>
 			<h3>Votre panier est vide !</h3>
+			<a href='/product'>
+						<button class='btn btn-primary'>Notre boutique</button>
+					</a>
 		{% endif %}
 	</main>
 	{% include '_partials/_footer.html.twig'%}
