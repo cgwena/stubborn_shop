@@ -10,19 +10,20 @@
 		<div class='products'>
 			{% for product in homepageProducts%}
 				<div class='products_details'>
-					<img src={{asset('images/products/' ~ product.imageName)}}>
-					<h2>{{ product.name }}</h2>
-					<h3>{{ product.price|number_format(2, ',', '.') }}
-						€</h3>
-					{% if is_granted('ROLE_USER') %}
-
-						<a href="{{ path('product_by_id', {'id': product.id}) }}">
-							<button>Voir</button>
-						</a>
-                        {% endif %}
+					<img class='products_details_img' src={{asset('images/products/' ~ product.imageName)}}>
+					<div class='product_infos'>
+						<h2>{{ product.name }}</h2>
+						<h3>{{ product.price|number_format(2, ',', '.') }}
+							€</h3>
+						{% if is_granted('ROLE_USER') %}
+							<a href="{{ path('product_by_id', {'id': product.id}) }}">
+								<button class='btn btn-primary'>Voir</button>
+							</a>
+						{% endif %}
 					</div>
-				{% endfor %}
-			</div>
-		</main>
-		{% include '_partials/_footer.html.twig'%}
-	{% endblock %}
+				</div>
+			{% endfor %}
+		</div>
+	</main>
+	{% include '_partials/_footer.html.twig'%}
+{% endblock %}
