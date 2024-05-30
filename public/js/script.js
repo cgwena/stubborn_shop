@@ -23,3 +23,7 @@ function priceChoice(value) {
         })
         .catch(error => console.error('Error:', error));
 }
+
+function checkoutSession() {
+    
+}

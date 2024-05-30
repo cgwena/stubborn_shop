@@ -38,9 +38,11 @@
 						€</h3>
 				</div>
 				<div class='cart_btns'>
-					<a>
-						<button class='btn btn-danger w-100'>Finaliser ma commande</button>
-					</a>
+					<form id='checkout-form' method='post' action="{{ path('app_stripe') }}">
+						<input type='hidden' name='stripeToken' id='stripe-token-id'>
+						<input type='hidden' name='totalAmount' value='{{ total|number_format(2, ',', '.') }}'>
+						<button class='btn btn-danger w-100' id='checkout-button'>Finaliser ma commande</button>
+					</form>
 					<a href='/product'>
 						<button class='btn btn-success w-100'>Continuer mes achats</button>
 					</a>
@@ -52,9 +54,14 @@
 			<h1>Mon panier</h1>
 			<h3>Votre panier est vide !</h3>
 			<a href='/product'>
-						<button class='btn btn-primary'>Notre boutique</button>
-					</a>
+				<button class='btn btn-primary'>Notre boutique</button>
+			</a>
 		{% endif %}
 	</main>
 	{% include '_partials/_footer.html.twig'%}
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="{{ asset('assets/js/checkout.js') }}"></script>
 {% endblock %}
