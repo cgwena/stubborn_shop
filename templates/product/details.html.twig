@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Stubborn - {{product.name}}
+	Stubborn -
+	{{product.name}}
 {% endblock %}
 
 {% block body %}
@@ -16,24 +17,19 @@
 						<h3>{{ product.price|number_format(2, ',', '.') }}
 							€</h3>
 					</div>
-					<div class='product_details_size'>
-						<select class='form-select' onchange='sizeChoice(this.value)'>
-							<option>Taille</option>
-							<option value="1">XS</option>
-							<option value="2">S</option>
-							<option value="3">M</option>
-							<option value="4">L</option>
-							<option value="5">XL</option>
+					<form method="post" action="{{ path('cart_add', {id : product.id}) }}">
+						<select name="size" class='form-select'>
+							<option value="">Taille</option>
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+							<option value="XL">XL</option>
 						</select>
-					</div>
-				</div>
-				<div class='add_btn'>
-					<a href='{{ path('cart_add', {id : product.id}) }}'>
-						<button class='btn btn-primary w-100'>Ajouter au panier</button>
-					</a>
+						<button type="submit" class='btn btn-primary w-100'>Ajouter au panier</button>
+					</form>
 				</div>
 			</div>
-		</div>
-	</main>
-	{% include '_partials/_footer.html.twig'%}
-{% endblock %}
+		</main>
+		{% include '_partials/_footer.html.twig'%}
+	{% endblock %}

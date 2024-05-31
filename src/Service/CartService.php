@@ -19,34 +19,61 @@ class CartService
         $this->em = $em;
     }
 
-    public function addToCart(int $id): void
+    public function addToCart(int $id, string $size): void
     {
         $cart = $this->getSession()->get('cart', []);
-        if (!empty($cart[$id])) {
-            $cart[$id]++;
-        } else {
-            $cart[$id] = 1;
+
+        $found = false;
+        foreach ($cart as &$item) {
+            if ($item['id'] == $id && $item['size'] == $size) {
+                $item['quantity']++;
+                $found = true;
+                break;
+            }
         }
+
+        if (!$found) {
+            $cart[] = [
+                'id' => $id,
+                'size' => $size,
+                'quantity' => 1,
+            ];
+        }
+
         $this->getSession()->set('cart', $cart);
     }
 
-    public function removeOne(int $id): void
+
+    public function removeOne(int $id, string $size): void
     {
         $cart = $this->getSession()->get('cart', []);
-        if ($cart[$id]==1){
-            unset($cart[$id]);
-        } else {
-            $cart[$id]--;
+
+        foreach ($cart as $key => &$item) {
+            if ($item['id'] == $id && $item['size'] == $size) {
+                if ($item['quantity'] == 1) {
+                    unset($cart[$key]);
+                } else {
+                    $item['quantity']--;
+                }
+                break;
+            }
         }
-        
+
         $this->getSession()->set('cart', $cart);
     }
 
-    public function removeFromCart(int $id)
+    public function removeFromCart(int $id, string $size): void
     {
         $cart = $this->getSession()->get('cart', []);
-        unset($cart[$id]);
-        return $this->getSession()->set('cart', $cart);
+
+        foreach ($cart as $key => $item) {
+            if ($item['id'] == $id && $item['size'] == $size) {
+                unset($cart[$key]);
+                break;
+            }
+        }
+
+        $this->getSession()->set('cart', $cart);
     }
 
     public function removeAll()
@@ -56,20 +83,28 @@ class CartService
 
     public function getTotal(): array
     {
-        $cart = $this->getSession()->get('cart');
+        $cart = $this->getSession()->get('cart', []);
         $cartData = [];
+
         if ($cart) {
-            foreach ($cart as $id => $quantity) {
-                $product = $this->em->getRepository(Product::class)->findOneBy(['id' => $id]);
+            foreach ($cart as $item) {
+                if (!is_array($item) || !isset($item['id'])) {
+                    continue;
+                }
+
+                $product = $this->em->getRepository(Product::class)->findOneBy(['id' => $item['id']]);
                 if (!$product) {
-                    //
+                    continue;
                 }
                 $cartData[] = [
                     'product' => $product,
-                    'quantity' => $quantity
+                    'quantity' => $item['quantity'],
+                    'size' => $item['size'],
                 ];
             }
+            // dd($cartData);
         }
+
         return $cartData;
     }
 

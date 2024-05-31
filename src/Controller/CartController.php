@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -18,9 +19,10 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/add/{id<\d+>}', name: 'cart_add')]
-    public function add(CartService $cartService, int $id): Response
+    public function add(Request $request, CartService $cartService, int $id): Response
     {
-        $cartService->addToCart($id);
+        $size = $request->request->get('size');
+        $cartService->addToCart($id, $size);
 
         return $this->redirectToRoute('app_cart', [
             'controller_name' => 'CartController',
@@ -28,9 +30,10 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/removeOne/{id<\d+>}', name: 'cart_remove_one')]
-    public function removeOne(CartService $cartService, int $id): Response
+    public function removeOne(Request $request, CartService $cartService, int $id): Response
     {
-        $cartService->removeOne($id);
+        $size = $request->request->get('size');
+        $cartService->removeOne($id, $size);
 
         return $this->redirectToRoute('app_cart', [
             'controller_name' => 'CartController',
@@ -39,9 +42,11 @@ class CartController extends AbstractController
 
 
     #[Route('/cart/remove/{id<\d+>}', name: 'cart_remove')]
-    public function removeFromCart(CartService $cartService, int $id): Response
+    public function removeFromCart(Request $request, CartService $cartService, int $id): Response
     {
-        $cartService->removeFromCart($id);
+        $size = $request->request->get('size');
+
+        $cartService->removeFromCart($id, $size);
 
         return $this->redirectToRoute('app_cart', [
             'controller_name' => 'CartController',
