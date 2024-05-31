@@ -5,7 +5,6 @@ namespace App\Service;
 require_once '../vendor/autoload.php';
 class StripeService
 {
-
     private $privateKey;
 
     public function __construct()
@@ -38,7 +37,5 @@ class StripeService
                 'enabled' => true,
             ],
         ]);
-
-        
     }
 }
