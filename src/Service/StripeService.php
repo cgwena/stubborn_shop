@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-require_once '../vendor/autoload.php';
 class StripeService
 {
     private $privateKey;

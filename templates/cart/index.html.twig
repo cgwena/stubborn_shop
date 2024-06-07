@@ -19,20 +19,21 @@
 					<h3>{{ item.product.name }}</h3>
 					<h3>{{ item.product.price|number_format(2, ',', '.') }}</h3>
 					<form method="post" action="{{ path('cart_remove_one', {id: item.product.id}) }}">
-                        <input type="hidden" name="size" value="{{ item.size }}">
-                        <button class="btn btn-primary">-</button>
-                    </form>
+						<input type="hidden" name="size" value="{{ item.size }}">
+						<button class="btn btn-primary">-</button>
+					</form>
 					<h4>{{ item.quantity }}</h4>
 					<form method="post" action="{{ path('cart_add', {id: item.product.id}) }}">
-                        <input type="hidden" name="size" value="{{ item.size }}">
-                        <button class="btn btn-primary">+</button>
-                    </form>
+						<input type="hidden" name="size" value="{{ item.size }}">
+						<button class="btn btn-primary">+</button>
+					</form>
 					<h3>{{ (item.product.price * item.quantity)|number_format(2, ',', '.') }}</h3>
-					<h4>Taille : {{ item.size }}</h4>
+					<h4>Taille :
+						{{ item.size }}</h4>
 					<form method="post" action="{{ path('cart_remove', {id: item.product.id}) }}">
-                        <input type="hidden" name="size" value="{{ item.size }}">
-                        <button class="btn btn-primary w-100">Retirer du panier</button>
-                    </form>
+						<input type="hidden" name="size" value="{{ item.size }}">
+						<button class="btn btn-primary w-100">Retirer du panier</button>
+					</form>
 				</div>
 			{% endfor %}
 			<div class='cart_end'>
@@ -63,4 +64,8 @@
 		{% endif %}
 	</main>
 	{% include '_partials/_footer.html.twig'%}
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://js.stripe.com/v3/"></script>
 {% endblock %}
