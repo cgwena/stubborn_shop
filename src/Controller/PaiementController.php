@@ -20,7 +20,6 @@ class PaiementController extends AbstractController
         $totalAmount = $request->request->get('totalAmount');
 
         $checkout_session = $stripeService->checkout($totalAmount);
-        //dd($checkout_session->url);
 
         return new RedirectResponse($checkout_session->url);
     }

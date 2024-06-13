@@ -18,7 +18,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/add/{id<\d+>}', name: 'cart_add')]
+    #[Route('/cart/add/{id<\d+>}', name: 'cart_add', methods: ['POST'])]    
     public function add(Request $request, CartService $cartService, int $id): Response
     {
         $size = $request->request->get('size');
