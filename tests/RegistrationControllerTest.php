@@ -36,16 +36,17 @@ class RegistrationControllerTest extends WebTestCase
         // Register a new user
         $this->client->request('GET', '/register');
         self::assertResponseIsSuccessful();
-        self::assertPageTitleContains('Register');
+        self::assertPageTitleContains('Stubborn - Créer un compte');
 
-        $this->client->submitForm('Register', [
+        $this->client->submitForm('Créer un compte', [
+            'registration_form[username]' => 'testName',
             'registration_form[email]' => 'me@example.com',
+            'registration_form[deliveryAddress]' => 'testAdress',
             'registration_form[plainPassword]' => 'password',
-            'registration_form[agreeTerms]' => true,
         ]);
 
         // Ensure the response redirects after submitting the form, the user exists, and is not verified
-        // self::assertResponseRedirects('/');  @TODO: set the appropriate path that the user is redirected to.
+        self::assertResponseRedirects('/login');
         self::assertCount(1, $this->userRepository->findAll());
         self::assertFalse(($user = $this->userRepository->findAll()[0])->isVerified());
 
@@ -54,10 +55,10 @@ class RegistrationControllerTest extends WebTestCase
         // self::assertQueuedEmailCount(1);
         self::assertEmailCount(1);
 
-        self::assertCount(1, $messages = $this->getMailerMessages());
+        self::assertCount(2, $messages = $this->getMailerMessages());
         self::assertEmailAddressContains($messages[0], 'from', 'stubborn@mail.com');
         self::assertEmailAddressContains($messages[0], 'to', 'me@example.com');
-        self::assertEmailTextBodyContains($messages[0], 'This link will expire in 1 hour.');
+        self::assertEmailTextBodyContains($messages[0], 'Ce lien expire dans');
 
         // Login the new user
         $this->client->followRedirect();

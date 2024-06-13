@@ -43,7 +43,7 @@ footer {
     text-align: center;
 }
 
-a {
+nav a {
     text-decoration: none;
     color :#F48975;
     padding: 10px;
@@ -120,6 +120,7 @@ a:hover {
 .cart_btns {
     display: flex;
     flex-direction: column;
+    margin-left : 10px;
 }
 
 .cart_total {

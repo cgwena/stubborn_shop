@@ -40,7 +40,7 @@ class ProductController extends AbstractController
     }
 
 
-    #[Route("/filter-products", name: "filter_products", methods: "GET")]
+    #[Route("/filter-products", name: "filter_products", methods: ["GET"])]
 
     public function filterProducts(Request $request, ProductRepository $productRepository)
     {
