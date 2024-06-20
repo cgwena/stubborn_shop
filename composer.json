@@ -11,11 +11,11 @@
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.1",
+        "nelmio/api-doc-bundle": "^4.28",
         "phpdocumentor/reflection-docblock": "^5.4",
         "phpstan/phpdoc-parser": "^1.29",
         "stripe/stripe-php": "^14.8",
         "symfony/asset": "7.0.*",
-        "symfony/asset-mapper": "7.0.*",
         "symfony/console": "7.0.*",
         "symfony/doctrine-messenger": "7.0.*",
         "symfony/dotenv": "7.0.*",
@@ -35,13 +35,14 @@
         "symfony/runtime": "7.0.*",
         "symfony/security-bundle": "7.0.*",
         "symfony/serializer": "7.0.*",
-        "symfony/stimulus-bundle": "^2.17",
+        "symfony/stimulus-bundle": "*",
         "symfony/string": "7.0.*",
         "symfony/translation": "7.0.*",
         "symfony/twig-bundle": "7.0.*",
-        "symfony/ux-turbo": "^2.17",
+        "symfony/ux-turbo": "*",
         "symfony/validator": "7.0.*",
         "symfony/web-link": "7.0.*",
+        "symfony/webpack-encore-bundle": "*",
         "symfony/yaml": "7.0.*",
         "symfonycasts/verify-email-bundle": "^1.17",
         "twig/extra-bundle": "^2.12|^3.0",
@@ -79,15 +80,17 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "importmap:install": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@test"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
-        ]
+            "@auto-scripts",
+            "@test"
+        ],
+        "test": "php bin/phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"
