@@ -13,9 +13,9 @@ use OpenApi\Attributes as OA;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin/add', name: 'admin', methods: ['POST'])]
+    #[Route('/admin', name: 'admin', methods: ['POST','GET'])]
     #[OA\Post(
-        path: '/admin/add',
+        path: '/admin',
         tags: ['Admin'],
         summary: 'Ajouter un produit',
         description: 'Affiche la page d\'administration permettant d\'ajouter et de gérer les produits.',
@@ -108,7 +108,7 @@ class AdminController extends AbstractController
     ]);
     }
 
-    #[Route('/admin/deleteProduct/{id}', name: 'delete_product', methods: ['POST'])]
+    #[Route('/admin/deleteProduct/{id}', name: 'delete_product', methods: ['POST','GET'])]
     #[OA\Post(
         path: '/admin/deleteProduct/{id}',
         tags: ['Admin'],

@@ -10,7 +10,7 @@ use OpenApi\Attributes as OA;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login', methods:['GET'])]
+    #[Route(path: '/login', name: 'app_login', methods:['POST','GET'])]
     #[OA\Get(
         path: '/login',
         tags: ['Security'],
@@ -41,7 +41,7 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout', methods:['POST'])]
+    #[Route(path: '/logout', name: 'app_logout', methods:['POST','GET'])]
     #[OA\Post(
         path: '/logout',
         tags: ['Security'],

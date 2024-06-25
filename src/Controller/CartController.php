@@ -151,7 +151,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/removeAll', name: 'cart_removeAll', methods: ['POST'])]
+    #[Route('/cart/removeAll', name: 'cart_removeAll', methods: ['POST','GET'])]
     #[OA\Post(
         path: '/cart/removeAll',
         tags: ['Cart'],
