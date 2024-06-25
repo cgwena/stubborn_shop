@@ -2,23 +2,31 @@
 
 namespace App\Controller;
 
-use App\Entity\PriceChoice;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
+
+
+
 class ProductController extends AbstractController
 {
-    #[Route('/product', name: 'app_product')]
-    public function index(Request $request, ManagerRegistry $manager): Response
+    /**
+     * Cette méthode permet de récupérer tous les produits
+     */
+    #[Route('/product', name: 'app_product', methods: ["GET"])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns all the products',
+    )]
+    #[OA\Tag(name: 'Product')]
+         public function index(ManagerRegistry $manager): Response
     {
 
         $products = $manager->getRepository(Product::class)->findAll();
@@ -28,9 +36,16 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * Cette méthode permet de récupérer un produit par son id.
+     */
 
-
-    #[Route('/product/{id}', name: 'product_by_id')]
+    #[Route('/product/{id}', name: 'product_by_id', methods: ["GET"])]
+    #[OA\Response(
+        response: 200,
+        description: 'Returns one products by its id',
+    )]
+    #[OA\Tag(name: 'Product')]
     public function productById(int $id, ManagerRegistry $manager): Response
     {
         $product = $manager->getRepository(Product::class)->findOneBy(['id' => $id]);
@@ -39,9 +54,16 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * Cette méthode permet de récupérer les produits dans une fourchette de prix.
+     */
 
     #[Route("/filter-products", name: "filter_products", methods: ["GET"])]
-
+    #[OA\Response(
+        response: 200,
+        description: 'Returns the products according to their price',
+    )]
+    #[OA\Tag(name: 'Product')]
     public function filterProducts(Request $request, ProductRepository $productRepository)
     {
         $priceRange = (int) $request->query->get('priceRange');

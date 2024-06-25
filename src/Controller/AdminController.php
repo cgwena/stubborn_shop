@@ -9,12 +9,26 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use OpenApi\Attributes as OA;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin/add', name: 'admin', methods: ['POST'])]
+    #[OA\Post(
+        path: '/admin/add',
+        tags: ['Admin'],
+        summary: 'Ajouter un produit',
+        description: 'Affiche la page d\'administration permettant d\'ajouter et de gérer les produits.',
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Page d\'administration affichée'
+            )
+        ]
+    )]
     public function add(Request $request, ManagerRegistry $manager): Response
     {
+        
         $newproduct = new Product;
         $products = $manager->getRepository(Product::class)->findAll();
 
@@ -45,7 +59,32 @@ class AdminController extends AbstractController
 
     }
 
-    #[Route('/updateProduct/{id}', name: 'update_product')]
+    #[Route('/admin/updateProduct/{id}', name: 'update_product', methods: ['POST'])]
+    #[OA\Post(
+        path: '/admin/updateProduct/{id}',
+        tags: ['Admin'],
+        summary: 'Mettre à jour un produit',
+        description: 'Met à jour un produit existant selon son ID.',
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                description: 'Identifiant unique du produit',
+                schema: new OA\Schema(type: 'integer')
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Produit mis à jour'
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Produit non trouvé'
+            )
+        ]
+    )]
     public function update(int $id, ManagerRegistry $manager, Request $request): Response
     {
         $product = $manager->getRepository(Product::class)->find($id);
@@ -69,7 +108,32 @@ class AdminController extends AbstractController
     ]);
     }
 
-    #[Route('/deleteProduct/{id}', name: 'delete_product')]
+    #[Route('/admin/deleteProduct/{id}', name: 'delete_product', methods: ['POST'])]
+    #[OA\Post(
+        path: '/admin/deleteProduct/{id}',
+        tags: ['Admin'],
+        summary: 'Supprimer un produit',
+        description: 'Supprime un produit existant selon son ID.',
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                description: 'Identifiant unique du produit',
+                schema: new OA\Schema(type: 'integer')
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Produit supprimé'
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Produit non trouvé'
+            )
+        ]
+    )]
 
     public function delete(int $id, ManagerRegistry $manager): Response
     {
