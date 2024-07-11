@@ -94,10 +94,10 @@
             "@auto-scripts",
             "@test"
         ],
-        "test": "php bin/phpunit",
         "npm": "npm install",
         "npm_run": "npm run dev",
-        "maildev": "maildev"
+        "maildev": "maildev",
+        "test": "php bin/phpunit"
 
     },
     "conflict": {
