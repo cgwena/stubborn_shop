@@ -12,7 +12,7 @@ use OpenApi\Attributes as OA;
 
 class CartController extends AbstractController
 {
-    #[Route('/cart', name: 'app_cart', methods: ['GET'])]
+    #[Route('/cart', name: 'app_cart')]
     #[OA\Get(
         path: '/cart',
         tags: ['Cart'],
@@ -32,7 +32,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/add/{id<\d+>}', name: 'cart_add', methods: ['POST'])]   
+    #[Route('/cart/add/{id<\d+>}', name: 'cart_add')]   
     #[OA\Post(
         path: '/cart/add/{id}',
         tags: ['Cart'],
@@ -71,7 +71,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/removeOne/{id<\d+>}', name: 'cart_remove_one', methods: ['POST'])]
+    #[Route('/cart/removeOne/{id<\d+>}', name: 'cart_remove_one')]
     #[OA\Post(
         path: '/cart/removeOne/{id}',
         tags: ['Cart'],
@@ -111,7 +111,7 @@ class CartController extends AbstractController
     }
 
 
-    #[Route('/cart/remove/{id<\d+>}', name: 'cart_remove', methods: ['POST'])]
+    #[Route('/cart/remove/{id<\d+>}', name: 'cart_remove')]
     #[OA\Post(
         path: '/cart/remove/{id}',
         tags: ['Cart'],
@@ -151,7 +151,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/removeAll', name: 'cart_removeAll', methods: ['POST','GET'])]
+    #[Route('/cart/removeAll', name: 'cart_removeAll')]
     #[OA\Post(
         path: '/cart/removeAll',
         tags: ['Cart'],
