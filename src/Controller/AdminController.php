@@ -13,7 +13,7 @@ use OpenApi\Attributes as OA;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'admin', methods: ['POST','GET'])]
+    #[Route('/admin', name: 'admin')]
     #[OA\Post(
         path: '/admin',
         tags: ['Admin'],
@@ -59,7 +59,7 @@ class AdminController extends AbstractController
 
     }
 
-    #[Route('/admin/updateProduct/{id}', name: 'update_product', methods: ['POST'])]
+    #[Route('/admin/updateProduct/{id}', name: 'update_product')]
     #[OA\Post(
         path: '/admin/updateProduct/{id}',
         tags: ['Admin'],
@@ -108,7 +108,7 @@ class AdminController extends AbstractController
     ]);
     }
 
-    #[Route('/admin/deleteProduct/{id}', name: 'delete_product', methods: ['POST','GET'])]
+    #[Route('/admin/deleteProduct/{id}', name: 'delete_product')]
     #[OA\Post(
         path: '/admin/deleteProduct/{id}',
         tags: ['Admin'],

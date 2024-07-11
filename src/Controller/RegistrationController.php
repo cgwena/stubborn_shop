@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
     {
     }
 
-    #[Route('/register', name: 'app_register', methods: ['POST','GET'])]
+    #[Route('/register', name: 'app_register')]
     #[OA\Post(
         path: '/register',
         tags: ['User'],
