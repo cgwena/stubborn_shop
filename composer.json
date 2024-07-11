@@ -11,7 +11,6 @@
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.1",
-        "nelmio/api-doc-bundle": "^4.28",
         "phpdocumentor/reflection-docblock": "^5.4",
         "phpstan/phpdoc-parser": "^1.29",
         "stripe/stripe-php": "^14.8",
@@ -85,16 +84,15 @@
         },
         "post-install-cmd": [
             "@auto-scripts",
-            "npm",
+            "npm install",
             "npm run dev",
-            "@maildev",
+            "nohup maildev &",
             "@test"
         ],
         "post-update-cmd": [
             "@auto-scripts",
             "@test"
         ],
-        "maildev": "maildev",
         "test": "php bin/phpunit"
 
     },
