@@ -85,13 +85,20 @@
         },
         "post-install-cmd": [
             "@auto-scripts",
-            "@test"
+            "@test",
+            "@npm",
+            "@npm_run",
+            "@maildev"
         ],
         "post-update-cmd": [
             "@auto-scripts",
             "@test"
         ],
-        "test": "php bin/phpunit"
+        "test": "php bin/phpunit",
+        "npm": "npm install",
+        "npm_run": "npm run dev",
+        "maildev": "maildev"
+
     },
     "conflict": {
         "symfony/symfony": "*"
