@@ -85,17 +85,15 @@
         },
         "post-install-cmd": [
             "@auto-scripts",
-            "@test",
-            "@npm",
-            "@npm_run",
-            "@maildev"
+            "npm",
+            "npm run dev",
+            "@maildev",
+            "@test"
         ],
         "post-update-cmd": [
             "@auto-scripts",
             "@test"
         ],
-        "npm": "npm install",
-        "npm_run": "npm run dev",
         "maildev": "maildev",
         "test": "php bin/phpunit"
 
