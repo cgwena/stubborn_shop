@@ -83,12 +83,10 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts",
-            "@test"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts",
-            "@test"
+            "@auto-scripts"
         ],
         "test": "php bin/phpunit"
 
