@@ -23,6 +23,10 @@ cd votre-repo
 Installez les dépendances PHP via Composer :
 composer install
 
+Préparez la mise en place de la base de données:
+Dupliquez le fichier .env en .env.local et mettre à jour la variable DATABASE_URL
+Dupliquez le fichier .env.test en .env.test.local
+
 Créez la base de données et exécutez les migrations :
 
 php bin/console doctrine:database:create
@@ -30,7 +34,7 @@ php bin/console doctrine:migrations:migrate
 
 Utilisation
 Pour démarrer le serveur de développement, utilisez la commande suivante :
-symfony server:start
+./start_server.sh
 
 Accédez à l'application dans votre navigateur à l'adresse http://127.0.0.1:8000.
 
